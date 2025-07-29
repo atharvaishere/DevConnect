@@ -7,7 +7,7 @@ function ProjectForm() {
   const { user } = useContext(AuthContext);
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
-  const [links, setLinks] = useState('');
+  const [links, setLinks] = useState(['']); // Changed to array
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
@@ -26,7 +26,7 @@ function ProjectForm() {
       console.log('Creating project with:', { userId: user.userId, title, description, links });
       const res = await axios.post(
         `${process.env.REACT_APP_API_URL}/api/projects/create`,
-        { userId: user.userId, title, description, links: links.split(',').map(link => link.trim()) },
+        { userId: user.userId, title, description, links: links.filter(link => link.trim() !== '') },
         { headers: { Authorization: `Bearer ${user.token}` } }
       );
       console.log('Project creation response:', res.data);
@@ -37,6 +37,16 @@ function ProjectForm() {
     } finally {
       setLoading(false);
     }
+  };
+
+  const addLink = () => setLinks([...links, '']);
+  const updateLink = (index, value) => {
+    const newLinks = [...links];
+    newLinks[index] = value;
+    setLinks(newLinks);
+  };
+  const removeLink = (index) => {
+    setLinks(links.filter((_, i) => i !== index));
   };
 
   return (
@@ -78,15 +88,37 @@ function ProjectForm() {
           </div>
           <div>
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-200">
-              Links (comma-separated)
+              Links
             </label>
-            <input
-              type="text"
-              value={links}
-              onChange={(e) => setLinks(e.target.value)}
-              className="mt-1 w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:ring-secondary focus:border-secondary"
+            {links.map((link, index) => (
+              <div key={index} className="flex space-x-2 mt-1">
+                <input
+                  type="url"
+                  value={link}
+                  onChange={(e) => updateLink(index, e.target.value)}
+                  className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:ring-secondary focus:border-secondary"
+                  disabled={loading}
+                />
+                {links.length > 1 && (
+                  <button
+                    type="button"
+                    onClick={() => removeLink(index)}
+                    className="text-red-500 p-3"
+                    disabled={loading}
+                  >
+                    Remove
+                  </button>
+                )}
+              </div>
+            ))}
+            <button
+              type="button"
+              onClick={addLink}
+              className="mt-2 text-blue-500 hover:underline"
               disabled={loading}
-            />
+            >
+              Add Link
+            </button>
           </div>
           <button
             type="submit"
