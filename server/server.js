@@ -12,6 +12,9 @@ const express = require('express');
   app.use(express.json());
   app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
+  app.get('/', (req, res) => {
+     res.json({ message: 'DevConnect Backend API is running' });
+   });
   app.use('/api/auth', require('./routes/auth'));
   app.use('/api/users', require('./routes/users'));
   app.use('/api/projects', require('./routes/projects'));
