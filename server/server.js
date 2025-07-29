@@ -8,7 +8,7 @@ const express = require('express');
 
   const app = express();
 
-  app.use(cors({ origin: process.env.FRONTEND_URL || 'http://localhost:3000' }));
+  app.use(cors({ origin: process.env.FRONTEND_URL || 'http://localhost:3000' || 'https://devconnect-sandy.vercel.app'}));
   app.use(express.json());
   app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
