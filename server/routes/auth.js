@@ -5,7 +5,7 @@ const jwt = require('jsonwebtoken');
 const User = require('../models/User');
 
 router.post('/signup', async (req, res) => {
-  console.log('Signup route hit');
+  console.log('Signup route hit:', req.body);
   const { username, email, password } = req.body;
   try {
     console.log('User model:', User ? 'Loaded' : 'Not loaded');
@@ -21,7 +21,7 @@ router.post('/signup', async (req, res) => {
 
     const payload = { userId: newUser._id };
     const token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '1h' });
-    res.json({ token });
+    res.json({ token, userId: newUser._id });
   } catch (err) {
     console.error('Signup error:', err);
     res.status(500).json({ message: 'Server error' });
@@ -29,7 +29,7 @@ router.post('/signup', async (req, res) => {
 });
 
 router.post('/login', async (req, res) => {
-  console.log('Login route hit');
+  console.log('Login route hit:', req.body);
   const { email, password } = req.body;
   try {
     const user = await User.findOne({ email });
@@ -44,7 +44,7 @@ router.post('/login', async (req, res) => {
 
     const payload = { userId: user._id };
     const token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '1h' });
-    res.json({ token });
+    res.json({ token, userId: user._id });
   } catch (err) {
     console.error('Login error:', err);
     res.status(500).json({ message: 'Server error' });
