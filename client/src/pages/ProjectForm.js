@@ -25,7 +25,7 @@ function ProjectForm() {
     try {
       console.log('Creating project with:', { userId: user.userId, title, description, links });
       const res = await axios.post(
-        'http://localhost:4000/api/projects/create',
+        `${process.env.REACT_APP_API_URL}/api/projects/create`,
         { userId: user.userId, title, description, links: links.split(',').map(link => link.trim()) },
         { headers: { Authorization: `Bearer ${user.token}` } }
       );

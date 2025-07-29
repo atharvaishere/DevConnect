@@ -21,10 +21,10 @@ import React, { useState, useEffect, useContext } from 'react';
         setError('');
         setLoading(true);
         try {
-          const profileRes = await axios.get('http://localhost:4000/api/users/profile', {
+          const profileRes = await axios.get(`${process.env.REACT_APP_API_URL}/api/users/profile`, {
             headers: { Authorization: `Bearer ${user.token}` }
           });
-          const projectsRes = await axios.get('http://localhost:4000/api/projects/all');
+          const projectsRes = await axios.get(`${process.env.REACT_APP_API_URL}/api/projects/all`);
           setProfile(profileRes.data);
           setBio(profileRes.data.bio || '');
           setGithub(profileRes.data.socialLinks?.github || '');
@@ -45,7 +45,7 @@ import React, { useState, useEffect, useContext } from 'react';
       setError('');
       try {
         const res = await axios.put(
-          'http://localhost:4000/api/users/profile',
+          `${process.env.REACT_APP_API_URL}/api/users/profile`,
           { bio, github, linkedin, twitter },
           { headers: { Authorization: `Bearer ${user.token}` } }
         );
@@ -65,7 +65,7 @@ import React, { useState, useEffect, useContext } from 'react';
       const formData = new FormData();
       formData.append('avatar', avatar);
       try {
-        const res = await axios.post('http://localhost:4000/api/users/avatar', formData, {
+        const res = await axios.post(`${process.env.REACT_APP_API_URL}/api/users/avatar`, formData, {
           headers: {
             Authorization: `Bearer ${user.token}`,
             'Content-Type': 'multipart/form-data'
@@ -80,7 +80,7 @@ import React, { useState, useEffect, useContext } from 'react';
     const handleDelete = async (projectId) => {
       if (window.confirm('Are you sure you want to delete this project?')) {
         try {
-          await axios.delete(`http://localhost:4000/api/projects/${projectId}`, {
+          await axios.delete(`${process.env.REACT_APP_API_URL}/api/projects/${projectId}`, {
             headers: { Authorization: `Bearer ${user.token}` }
           });
           setProjects(projects.filter(project => project._id !== projectId));
@@ -103,7 +103,7 @@ import React, { useState, useEffect, useContext } from 'react';
             </h2>
             {profile?.avatar && (
               <img
-                src={`http://localhost:4000${profile.avatar}`}
+                src={`${process.env.REACT_APP_API_URL}${profile.avatar}`}
                 alt="Avatar"
                 className="w-24 h-24 rounded-full mb-4"
               />

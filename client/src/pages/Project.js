@@ -21,11 +21,11 @@ import React, { useState, useEffect, useContext } from 'react';
         setLoading(true);
         try {
           console.log('Fetching project with ID:', id);
-          const projectRes = await axios.get(`http://localhost:4000/api/projects/${id}`);
+          const projectRes = await axios.get(`${process.env.REACT_APP_API_URL}/api/projects/${id}`);
           console.log('Project response:', projectRes.data);
           setProject(projectRes.data);
 
-          const commentsRes = await axios.get(`http://localhost:4000/api/comments/project/${id}`);
+          const commentsRes = await axios.get(`${process.env.REACT_APP_API_URL}/api/comments/project/${id}`);
           console.log('Comments response:', commentsRes.data);
           setComments(commentsRes.data);
         } catch (err) {
@@ -46,7 +46,7 @@ import React, { useState, useEffect, useContext } from 'react';
       }
       try {
         const res = await axios.post(
-          'http://localhost:4000/api/comments/create',
+          `${process.env.REACT_APP_API_URL}/api/comments/create`,
           { projectId: id, content: newComment },
           { headers: { Authorization: `Bearer ${user.token}` } }
         );
@@ -62,7 +62,7 @@ import React, { useState, useEffect, useContext } from 'react';
     const handleCommentEdit = async (commentId) => {
       try {
         const res = await axios.put(
-          `http://localhost:4000/api/comments/${commentId}`,
+          `${process.env.REACT_APP_API_URL}/api/comments/${commentId}`,
           { content: editCommentContent },
           { headers: { Authorization: `Bearer ${user.token}` } }
         );
@@ -77,7 +77,7 @@ import React, { useState, useEffect, useContext } from 'react';
     const handleCommentDelete = async (commentId) => {
       if (window.confirm('Are you sure you want to delete this comment?')) {
         try {
-          await axios.delete(`http://localhost:4000/api/comments/${commentId}`, {
+          await axios.delete(`${process.env.REACT_APP_API_URL}/api/comments/${commentId}`, {
             headers: { Authorization: `Bearer ${user.token}` }
           });
           setComments(comments.filter(c => c._id !== commentId));

@@ -15,7 +15,7 @@ function ProjectList() {
       setLoading(true);
       try {
         console.log('Fetching all projects');
-        const res = await axios.get('http://localhost:4000/api/projects/all');
+        const res = await axios.get(`${process.env.REACT_APP_API_URL}/api/projects/all`);
         console.log('Projects response:', res.data);
         setProjects(res.data);
         setFilteredProjects(res.data);

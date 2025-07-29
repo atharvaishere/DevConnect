@@ -13,7 +13,7 @@ import React, { useState } from 'react';
          setError('');
          setLoading(true);
          try {
-           const res = await axios.get(`http://localhost:4000/api/search?q=${searchTerm}`);
+           const res = await axios.get(`${process.env.REACT_APP_API_URL}api/search?q=${searchTerm}`);
            setResults(res.data);
          } catch (err) {
            setError(err.response?.data?.message || 'Search failed');

@@ -24,7 +24,7 @@ export const AuthProvider = ({ children }) => {
   const login = async (email, password) => {
     try {
       console.log('Attempting login with:', { email });
-      const res = await axios.post('http://localhost:4000/api/auth/login', { email, password });
+      const res = await axios.post(`${process.env.REACT_APP_API_URL}/api/auth/login`, { email, password });
       console.log('Login response:', res.data);
       const token = res.data.token;
       localStorage.setItem('token', token);
@@ -39,7 +39,7 @@ export const AuthProvider = ({ children }) => {
   const signup = async (username, email, password) => {
     try {
       console.log('Attempting signup with:', { username, email });
-      const res = await axios.post('http://localhost:4000/api/auth/signup', { username, email, password });
+      const res = await axios.post(`${process.env.REACT_APP_API_URL}/api/auth/signup`, { username, email, password });
       console.log('Signup response:', res.data);
       const token = res.data.token;
       localStorage.setItem('token', token);
