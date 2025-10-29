@@ -260,4 +260,5 @@ MIT License. See `LICENSE` file for details.
 
 
 
-Last updated: 2025-10-28 •
+
+Last updated: 2025-10-29 ⇒
