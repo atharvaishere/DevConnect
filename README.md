@@ -337,4 +337,5 @@ MIT License. See `LICENSE` file for details.
 
 
 
-Last updated: 2026-01-13 •
+
+Last updated: 2026-01-14 ⇒
