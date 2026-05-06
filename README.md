@@ -1,11 +1,16 @@
-# DevConnect
+# 🌐 DevConnect
+
+[![React](https://img.shields.io/badge/React-20232A?style=flat&logo=react&logoColor=61DAFB)](https://reactjs.org/)
+[![Node.js](https://img.shields.io/badge/Node.js-43853D?style=flat&logo=node.js&logoColor=white)](https://nodejs.org/)
+[![MongoDB](https://img.shields.io/badge/MongoDB-4EA94B?style=flat&logo=mongodb&logoColor=white)](https://www.mongodb.com/)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=flat&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
 
 DevConnect is a full-stack web application that allows developers to create, share, and explore projects. Users can sign up, log in, manage their profiles, create/edit/delete projects, comment on projects, and search for projects. The app is built with a React frontend, Node.js/Express backend, and MongoDB for data storage, deployed on Vercel (frontend) and Render (backend).
 
 ## Hosted Links
 - **Frontend**: [https://devconnect-sandy.vercel.app](https://devconnect-sandy.vercel.app)
 - **Backend**: [https://devconnect-backend-epkr.onrender.com](https://devconnect-backend-epkr.onrender.com)
-- **GitHub Repository**: [https://github.com/atharvaishere/devconnect](https://github.com/your-username/devconnect) 
+- **GitHub Repository**: [https://github.com/atharvaishere/devconnect](https://github.com/atharvaishere/devconnect) 
 
 ## Features
 - **User Authentication**: Sign up, log in, and log out with JWT-based authentication.
@@ -39,8 +44,8 @@ To run the project locally, follow these steps:
 
 ### Clone the Repository
 ```bash
-git clone https://github.com/your-username/devconnect.git
-cd devconnect
+git clone https://github.com/atharvaishere/DevConnect.git
+cd DevConnect
 ```
 
 ### Backend Setup
@@ -166,8 +171,6 @@ cd devconnect
 
 ## License
 MIT License. See `LICENSE` file for details.
-
-*(Replace `your-username` and repository URL with your actual GitHub details.)*
 
 
 
